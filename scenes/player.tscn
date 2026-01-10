@@ -154,3 +154,5 @@ animation = &"new_animation_2"
 [node name="CollisionShape2D" type="CollisionShape2D" parent="CharacterBody2D"]
 position = Vector2(0.5, 0.5)
 shape = SubResource("RectangleShape2D_g2els")
+
+[node name="Camera2D" type="Camera2D" parent="CharacterBody2D"]
