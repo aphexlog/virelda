@@ -1,4 +1,4 @@
-[gd_scene load_steps=20 format=3 uid="uid://dy2hpk8gq08qw"]
+[gd_scene load_steps=21 format=3 uid="uid://dy2hpk8gq08qw"]
 
 [ext_resource type="Texture2D" uid="uid://cosl0eleadgko" path="res://assets/characters/overworld/ow1.png" id="1_3vyb7"]
 [ext_resource type="Script" uid="uid://c7eedlfgnmpek" path="res://scenes/character_body_2d.gd" id="1_g2els"]
@@ -138,13 +138,19 @@ animations = [{
 "speed": 5.0
 }]
 
-[node name="Node2D" type="Node2D"]
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_g2els"]
+size = Vector2(11, 29)
+
+[node name="Player" type="Node2D"]
 
 [node name="CharacterBody2D" type="CharacterBody2D" parent="."]
 script = ExtResource("1_g2els")
 
 [node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="CharacterBody2D"]
+position = Vector2(0, 1)
 sprite_frames = SubResource("SpriteFrames_fulsm")
 animation = &"new_animation_2"
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="CharacterBody2D"]
+position = Vector2(0.5, 0.5)
+shape = SubResource("RectangleShape2D_g2els")
