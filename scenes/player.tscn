@@ -1,4 +1,4 @@
-[gd_scene load_steps=21 format=3 uid="uid://dy2hpk8gq08qw"]
+[gd_scene load_steps=22 format=3 uid="uid://dy2hpk8gq08qw"]
 
 [ext_resource type="Texture2D" uid="uid://cosl0eleadgko" path="res://assets/characters/overworld/ow1.png" id="1_3vyb7"]
 [ext_resource type="Script" uid="uid://c7eedlfgnmpek" path="res://scenes/character_body_2d.gd" id="1_g2els"]
@@ -9,13 +9,17 @@ region = Rect2(0, 0, 32, 32)
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_qhqgy"]
 atlas = ExtResource("1_3vyb7")
-region = Rect2(32, 0, 32, 32)
+region = Rect2(0, 0, 32, 32)
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_dqkch"]
 atlas = ExtResource("1_3vyb7")
-region = Rect2(64, 0, 32, 32)
+region = Rect2(32, 0, 32, 32)
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_qlg0r"]
+atlas = ExtResource("1_3vyb7")
+region = Rect2(64, 0, 32, 32)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_fulsm"]
 atlas = ExtResource("1_3vyb7")
 region = Rect2(96, 0, 32, 32)
 
@@ -72,7 +76,12 @@ animations = [{
 "frames": [{
 "duration": 1.0,
 "texture": SubResource("AtlasTexture_g2els")
+}],
+"loop": true,
+"name": &"Idol",
+"speed": 5.0
 }, {
+"frames": [{
 "duration": 1.0,
 "texture": SubResource("AtlasTexture_qhqgy")
 }, {
@@ -81,9 +90,12 @@ animations = [{
 }, {
 "duration": 1.0,
 "texture": SubResource("AtlasTexture_qlg0r")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_fulsm")
 }],
 "loop": true,
-"name": &"default",
+"name": &"walk_down",
 "speed": 5.0
 }, {
 "frames": [{
@@ -100,7 +112,7 @@ animations = [{
 "texture": SubResource("AtlasTexture_ur7pv")
 }],
 "loop": true,
-"name": &"new_animation",
+"name": &"walk_left",
 "speed": 5.0
 }, {
 "frames": [{
@@ -117,7 +129,7 @@ animations = [{
 "texture": SubResource("AtlasTexture_jej6c")
 }],
 "loop": true,
-"name": &"new_animation_1",
+"name": &"walk_right",
 "speed": 5.0
 }, {
 "frames": [{
@@ -134,7 +146,7 @@ animations = [{
 "texture": SubResource("AtlasTexture_qfm1y")
 }],
 "loop": true,
-"name": &"new_animation_2",
+"name": &"walk_up",
 "speed": 5.0
 }]
 
@@ -149,10 +161,12 @@ script = ExtResource("1_g2els")
 [node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="CharacterBody2D"]
 position = Vector2(0, 1)
 sprite_frames = SubResource("SpriteFrames_fulsm")
-animation = &"new_animation_2"
+animation = &"walk_left"
+autoplay = "Idol"
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="CharacterBody2D"]
 position = Vector2(0.5, 0.5)
 shape = SubResource("RectangleShape2D_g2els")
 
 [node name="Camera2D" type="Camera2D" parent="CharacterBody2D"]
+zoom = Vector2(4, 4)
