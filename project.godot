@@ -11,5 +11,18 @@ config_version=5
 [application]
 
 config/name="Virelda"
+run/main_scene="uid://bt852bwrbn4vb"
 config/features=PackedStringArray("4.4", "Forward Plus")
 config/icon="res://icon.svg"
+
+[autoload]
+
+GameData="*res://scripts/game_data.gd"
+
+[display]
+
+window/stretch/mode="viewport"
+
+[editor_plugins]
+
+enabled=PackedStringArray("res://addons/Relative-Line-Numbers-c9263a7301e0511416ffbdb61478f2a12934ab35/addons/relative_line_numbers/plugin.cfg", "res://addons/copilot/plugin.cfg", "res://addons/godot-vim/plugin.cfg")
