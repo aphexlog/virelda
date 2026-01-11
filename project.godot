@@ -21,8 +21,19 @@ GameData="*res://scripts/game_data.gd"
 
 [display]
 
+window/size/viewport_width=640
+window/size/viewport_height=360
+window/size/initial_screen=100
+window/size/window_width_override=1280
+window/size/window_height_override=720
 window/stretch/mode="viewport"
+window/stretch/scale_mode="integer"
+window/canvas_textures/default_texture_filter=0
 
 [editor_plugins]
 
 enabled=PackedStringArray("res://addons/Relative-Line-Numbers-c9263a7301e0511416ffbdb61478f2a12934ab35/addons/relative_line_numbers/plugin.cfg", "res://addons/copilot/plugin.cfg", "res://addons/godot-vim/plugin.cfg")
+
+[rendering]
+
+textures/canvas_textures/default_texture_filter=0

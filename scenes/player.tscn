@@ -151,7 +151,7 @@ animations = [{
 }]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_g2els"]
-size = Vector2(11, 29)
+size = Vector2(11, 8)
 
 [node name="Player" type="Node2D"]
 
@@ -159,13 +159,13 @@ size = Vector2(11, 29)
 script = ExtResource("1_g2els")
 
 [node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="CharacterBody2D"]
-position = Vector2(0, 1)
+position = Vector2(0, -16)
 sprite_frames = SubResource("SpriteFrames_fulsm")
 animation = &"walk_left"
 autoplay = "Idol"
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="CharacterBody2D"]
-position = Vector2(0.5, 0.5)
+position = Vector2(0, -5)
 shape = SubResource("RectangleShape2D_g2els")
 
 [node name="Camera2D" type="Camera2D" parent="CharacterBody2D"]

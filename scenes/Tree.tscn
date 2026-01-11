@@ -1,0 +1,33 @@
+[gd_scene load_steps=5 format=3 uid="uid://dxda1ptbamu2"]
+
+[ext_resource type="Texture2D" uid="uid://do3feo4r2bles" path="res://assets/tilesets/tileset.png" id="1_nbyt5"]
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_dn7q5"]
+atlas = ExtResource("1_nbyt5")
+region = Rect2(16, 384, 32, 16)
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_nbyt5"]
+size = Vector2(10, 16)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_72j6q"]
+atlas = ExtResource("1_nbyt5")
+region = Rect2(16, 352, 32, 32)
+
+[node name="Tree" type="Node2D"]
+
+[node name="TrunkSprite" type="Sprite2D" parent="."]
+position = Vector2(198.231, -60.6)
+scale = Vector2(1.20192, 1.215)
+texture = SubResource("AtlasTexture_dn7q5")
+
+[node name="StaticBody2D" type="StaticBody2D" parent="."]
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="StaticBody2D"]
+position = Vector2(198, -62)
+shape = SubResource("RectangleShape2D_nbyt5")
+
+[node name="TreeTopSprite" type="Sprite2D" parent="."]
+top_level = true
+position = Vector2(198.231, -90.6)
+scale = Vector2(1.04567, 1.275)
+texture = SubResource("AtlasTexture_72j6q")
