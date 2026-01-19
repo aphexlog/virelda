@@ -1,7 +1,8 @@
-[gd_scene load_steps=4 format=3 uid="uid://b6xv6r4ne30rc"]
+[gd_scene load_steps=5 format=3 uid="uid://b6xv6r4ne30rc"]
 
 [ext_resource type="Texture2D" uid="uid://dd0r3aui4uaqo" path="res://gfx/title/cover5.png" id="1_eb34j"]
 [ext_resource type="FontFile" uid="uid://r0maixtbrsdt" path="res://fonts/Sniglet Regular.ttf" id="2_aqpy5"]
+[ext_resource type="Theme" uid="uid://cg1k1l2re7soi" path="res://themes/default_theme.tres" id="3_w8uqo"]
 
 [sub_resource type="LabelSettings" id="LabelSettings_w8uqo"]
 font = ExtResource("2_aqpy5")
@@ -72,12 +73,18 @@ size_flags_horizontal = 3
 
 [node name="NewGameButton" type="Button" parent="Content/VBoxContainer/HBoxContainer/ButtonMenu"]
 layout_mode = 2
+focus_mode = 0
+theme = ExtResource("3_w8uqo")
 text = "New Game"
 
 [node name="LoadGameButton" type="Button" parent="Content/VBoxContainer/HBoxContainer/ButtonMenu"]
 layout_mode = 2
+focus_mode = 0
+theme = ExtResource("3_w8uqo")
 text = "Load Game"
 
 [node name="Credits" type="Button" parent="Content/VBoxContainer/HBoxContainer/ButtonMenu"]
 layout_mode = 2
+focus_mode = 0
+theme = ExtResource("3_w8uqo")
 text = "Credits"

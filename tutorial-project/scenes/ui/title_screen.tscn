@@ -1,0 +1,91 @@
+[gd_scene load_steps=5 format=3 uid="uid://dtvtvgly1oei3"]
+
+[ext_resource type="Texture2D" uid="uid://b3wkjs5hsc5p0" path="res://gfx/title/tree-3094982_1280.jpg" id="1_4j14g"]
+[ext_resource type="FontFile" uid="uid://cxsdfwyre6pgl" path="res://fonts/alagard_by_pix3m-d6awiwp.ttf" id="2_h28ec"]
+[ext_resource type="Theme" uid="uid://drjj6pv5d3b3u" path="res://themes/default_theme.tres" id="3_d5xb2"]
+
+[sub_resource type="LabelSettings" id="LabelSettings_fayfa"]
+font = ExtResource("2_h28ec")
+font_size = 40
+outline_size = 2
+outline_color = Color(0, 0, 0, 1)
+shadow_size = 5
+shadow_color = Color(0, 0, 0, 1)
+shadow_offset = Vector2(2, 2)
+
+[node name="Title Screen" type="Control"]
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="Background Image" type="TextureRect" parent="."]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+texture = ExtResource("1_4j14g")
+expand_mode = 5
+stretch_mode = 5
+
+[node name="Content" type="MarginContainer" parent="."]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+theme_override_constants/margin_left = 20
+theme_override_constants/margin_top = 20
+theme_override_constants/margin_right = 20
+theme_override_constants/margin_bottom = 20
+
+[node name="VBoxContainer" type="VBoxContainer" parent="Content"]
+layout_mode = 2
+
+[node name="Title" type="Label" parent="Content/VBoxContainer"]
+layout_mode = 2
+text = "Legacy of the Ancient Questor"
+label_settings = SubResource("LabelSettings_fayfa")
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="Spacer" type="MarginContainer" parent="Content/VBoxContainer"]
+layout_mode = 2
+size_flags_vertical = 3
+
+[node name="HBoxContainer" type="HBoxContainer" parent="Content/VBoxContainer"]
+layout_mode = 2
+
+[node name="MarginContainer" type="MarginContainer" parent="Content/VBoxContainer/HBoxContainer"]
+layout_mode = 2
+size_flags_horizontal = 3
+
+[node name="Button Menu" type="VBoxContainer" parent="Content/VBoxContainer/HBoxContainer"]
+layout_mode = 2
+size_flags_horizontal = 3
+
+[node name="New Game Button" type="Button" parent="Content/VBoxContainer/HBoxContainer/Button Menu"]
+layout_mode = 2
+focus_mode = 0
+theme = ExtResource("3_d5xb2")
+theme_override_font_sizes/font_size = 45
+text = "New Game"
+
+[node name="Load Game Button" type="Button" parent="Content/VBoxContainer/HBoxContainer/Button Menu"]
+layout_mode = 2
+focus_mode = 0
+theme = ExtResource("3_d5xb2")
+theme_override_font_sizes/font_size = 45
+text = "Load Game"
+
+[node name="Credits Button" type="Button" parent="Content/VBoxContainer/HBoxContainer/Button Menu"]
+layout_mode = 2
+focus_mode = 0
+theme = ExtResource("3_d5xb2")
+theme_override_font_sizes/font_size = 45
+text = "Credits"
