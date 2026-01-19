@@ -40,10 +40,44 @@ offset_left = 228.0
 offset_top = 136.0
 offset_right = 368.0
 offset_bottom = 176.0
+theme_override_constants/margin_left = 20
+theme_override_constants/margin_top = 20
+theme_override_constants/margin_right = 20
+theme_override_constants/margin_bottom = 20
 
-[node name="Label" type="Label" parent="Content"]
+[node name="VBoxContainer" type="VBoxContainer" parent="Content"]
+layout_mode = 2
+
+[node name="Title" type="Label" parent="Content/VBoxContainer"]
 layout_mode = 2
 text = "Virelda"
 label_settings = SubResource("LabelSettings_w8uqo")
 horizontal_alignment = 1
 vertical_alignment = 1
+
+[node name="Spacer" type="MarginContainer" parent="Content/VBoxContainer"]
+layout_mode = 2
+size_flags_vertical = 3
+
+[node name="HBoxContainer" type="HBoxContainer" parent="Content/VBoxContainer"]
+layout_mode = 2
+
+[node name="MarginContainer" type="MarginContainer" parent="Content/VBoxContainer/HBoxContainer"]
+layout_mode = 2
+size_flags_horizontal = 3
+
+[node name="ButtonMenu" type="VBoxContainer" parent="Content/VBoxContainer/HBoxContainer"]
+layout_mode = 2
+size_flags_horizontal = 3
+
+[node name="NewGameButton" type="Button" parent="Content/VBoxContainer/HBoxContainer/ButtonMenu"]
+layout_mode = 2
+text = "New Game"
+
+[node name="LoadGameButton" type="Button" parent="Content/VBoxContainer/HBoxContainer/ButtonMenu"]
+layout_mode = 2
+text = "Load Game"
+
+[node name="Credits" type="Button" parent="Content/VBoxContainer/HBoxContainer/ButtonMenu"]
+layout_mode = 2
+text = "Credits"
