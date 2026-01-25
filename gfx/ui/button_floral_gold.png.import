@@ -2,16 +2,16 @@
 
 importer="texture"
 type="CompressedTexture2D"
-uid="uid://bm2tcnd0ii65d"
-path="res://.godot/imported/cover4.png-5978d285f9e6a65ee9796566f98aa3e9.ctex"
+uid="uid://dm4hc10ek0ywn"
+path="res://.godot/imported/button_floral_gold.png-91387714453663896d110c8b8e20dcc6.ctex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://gfx/title/cover4.png"
-dest_files=["res://.godot/imported/cover4.png-5978d285f9e6a65ee9796566f98aa3e9.ctex"]
+source_file="res://gfx/ui/button_floral_gold.png"
+dest_files=["res://.godot/imported/button_floral_gold.png-91387714453663896d110c8b8e20dcc6.ctex"]
 
 [params]
 

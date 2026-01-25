@@ -1,30 +1,15 @@
-[gd_resource type="Theme" load_steps=7 format=3 uid="uid://cg1k1l2re7soi"]
+[gd_resource type="Theme" load_steps=3 format=3 uid="uid://cg1k1l2re7soi"]
 
 [ext_resource type="FontFile" uid="uid://r0maixtbrsdt" path="res://fonts/Sniglet Regular.ttf" id="1_mlkpy"]
-[ext_resource type="Texture2D" uid="uid://cl8grb3lc7mv" path="res://gfx/ui/buttonSquare_brown.png" id="2_lkf7m"]
-[ext_resource type="Texture2D" uid="uid://dcnig1nj57g07" path="res://gfx/ui/buttonSquare_brown_pressed.png" id="3_fx2g0"]
 
-[sub_resource type="StyleBoxTexture" id="StyleBoxTexture_nwjvr"]
-texture = ExtResource("2_lkf7m")
-axis_stretch_horizontal = 1
-axis_stretch_vertical = 1
-region_rect = Rect2(7, 4, 31, 37)
-
-[sub_resource type="StyleBoxTexture" id="StyleBoxTexture_het5a"]
-texture = ExtResource("2_lkf7m")
-axis_stretch_horizontal = 1
-axis_stretch_vertical = 1
-region_rect = Rect2(7, 4, 31, 37)
-
-[sub_resource type="StyleBoxTexture" id="StyleBoxTexture_r3xux"]
-texture = ExtResource("3_fx2g0")
-axis_stretch_horizontal = 1
-axis_stretch_vertical = 1
-region_rect = Rect2(7, 4, 31, 37)
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_mlkpy"]
+bg_color = Color(0.121569, 0.368627, 0.231373, 1)
+draw_center = false
 
 [resource]
 default_font_size = 23
+Button/colors/font_color = Color(0.83, 0.83, 0.83, 1)
 Button/fonts/font = ExtResource("1_mlkpy")
-Button/styles/hover = SubResource("StyleBoxTexture_nwjvr")
-Button/styles/normal = SubResource("StyleBoxTexture_het5a")
-Button/styles/pressed = SubResource("StyleBoxTexture_r3xux")
+Button/styles/hover = null
+Button/styles/normal = SubResource("StyleBoxFlat_mlkpy")
+Button/styles/pressed = null

@@ -1,6 +1,6 @@
-[gd_scene load_steps=5 format=3 uid="uid://b6xv6r4ne30rc"]
+[gd_scene load_steps=6 format=3 uid="uid://b6xv6r4ne30rc"]
 
-[ext_resource type="Texture2D" uid="uid://dd0r3aui4uaqo" path="res://gfx/title/cover5.png" id="1_eb34j"]
+[ext_resource type="Texture2D" uid="uid://cbv0cucplb2i7" path="res://gfx/title/start_screen.png" id="1_w8uqo"]
 [ext_resource type="FontFile" uid="uid://r0maixtbrsdt" path="res://fonts/Sniglet Regular.ttf" id="2_aqpy5"]
 [ext_resource type="Theme" uid="uid://cg1k1l2re7soi" path="res://themes/default_theme.tres" id="3_w8uqo"]
 
@@ -12,6 +12,9 @@ outline_size = 5
 shadow_size = 10
 shadow_color = Color(0, 0, 0, 0.466667)
 shadow_offset = Vector2(2, 5)
+
+[sub_resource type="LabelSettings" id="LabelSettings_a4ium"]
+font_color = Color(0.585826, 0.703433, 1, 1)
 
 [node name="Title Screen" type="Control"]
 layout_mode = 3
@@ -32,15 +35,15 @@ offset_right = -4.0
 offset_bottom = 1.1875
 grow_horizontal = 2
 grow_vertical = 2
-texture = ExtResource("1_eb34j")
+texture = ExtResource("1_w8uqo")
 expand_mode = 5
 
 [node name="Content" type="MarginContainer" parent="."]
 layout_mode = 0
-offset_left = 228.0
-offset_top = 136.0
-offset_right = 368.0
-offset_bottom = 176.0
+offset_left = 147.0
+offset_top = 16.0
+offset_right = 445.0
+offset_bottom = 313.0
 theme_override_constants/margin_left = 20
 theme_override_constants/margin_top = 20
 theme_override_constants/margin_right = 20
@@ -70,6 +73,7 @@ size_flags_horizontal = 3
 [node name="ButtonMenu" type="VBoxContainer" parent="Content/VBoxContainer/HBoxContainer"]
 layout_mode = 2
 size_flags_horizontal = 3
+size_flags_stretch_ratio = 1.5
 
 [node name="NewGameButton" type="Button" parent="Content/VBoxContainer/HBoxContainer/ButtonMenu"]
 layout_mode = 2
@@ -88,3 +92,12 @@ layout_mode = 2
 focus_mode = 0
 theme = ExtResource("3_w8uqo")
 text = "Credits"
+
+[node name="Version Number" type="Label" parent="."]
+layout_mode = 0
+offset_left = 10.0
+offset_top = 290.0
+offset_right = 77.0
+offset_bottom = 313.0
+text = "Version: "
+label_settings = SubResource("LabelSettings_a4ium")
