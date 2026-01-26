@@ -1,8 +1,9 @@
-[gd_scene load_steps=4 format=3 uid="uid://c8v3xk5yqp7m1"]
+[gd_scene load_steps=5 format=3 uid="uid://c8v3xk5yqp7m1"]
 
 [ext_resource type="Script" path="res://scripts/credits.gd" id="1_credits"]
 [ext_resource type="Texture2D" uid="uid://cbv0cucplb2i7" path="res://gfx/title/start_screen.png" id="2_bg"]
 [ext_resource type="FontFile" uid="uid://r0maixtbrsdt" path="res://fonts/Sniglet Regular.ttf" id="3_font"]
+[ext_resource type="Theme" uid="uid://cg1k1l2re7soi" path="res://themes/default_theme.tres" id="4_theme"]
 
 [node name="Credits" type="Control"]
 layout_mode = 3
@@ -75,9 +76,8 @@ text = "aphexlog"
 horizontal_alignment = 1
 
 [node name="Spacer2" type="Control" parent="MarginContainer/VBoxContainer"]
-custom_minimum_size = Vector2(0, 40)
+custom_minimum_size = Vector2(0, 20)
 layout_mode = 2
-size_flags_vertical = 3
 
 [node name="Thanks" type="Label" parent="MarginContainer/VBoxContainer"]
 layout_mode = 2
@@ -98,6 +98,8 @@ custom_minimum_size = Vector2(0, 20)
 layout_mode = 2
 
 [node name="BackButton" type="Button" parent="MarginContainer/VBoxContainer"]
+custom_minimum_size = Vector2(150, 40)
 layout_mode = 2
 size_flags_horizontal = 4
+theme = ExtResource("4_theme")
 text = "Back to Menu"
