@@ -6,20 +6,51 @@ extends CharacterBody2D
 func _ready():
 	add_to_group("player")
 	
+	# Apply selected character sprite
+	load_character_sprite()
+	
 	# Apply loaded position if loading a save
 	if GameData.should_apply_on_ready:
 		global_position = Vector2(GameData.player_data.position_x, GameData.player_data.position_y)
 		GameData.should_apply_on_ready = false
 		print("Loaded player position: ", global_position)
 
-func _physics_process(_delta: float) -> void:
-	var x := Input.get_axis("move_left", "move_right")
-	var y := Input.get_axis("move_up", "move_down")
+func load_character_sprite():
+	# Load the selected character's sprite
+	var texture = load(GameData.player_sprite_path)
+	if not texture:
+		push_error("Failed to load character sprite: " + GameData.player_sprite_path)
+		return
+	
+	print("Loading character: ", GameData.player_name)
+	
+	# Update all animation frames with the new character texture
+	if sprite and sprite.sprite_frames:
+		for anim_name in sprite.sprite_frames.get_animation_names():
+			var frame_count = sprite.sprite_frames.get_frame_count(anim_name)
+			for i in range(frame_count):
+				# Get the original frame to preserve the region coordinates
+				var original_texture = sprite.sprite_frames.get_frame_texture(anim_name, i)
+				
+				# Create a new AtlasTexture with the new character sprite
+				var new_atlas = AtlasTexture.new()
+				new_atlas.atlas = texture
+				
+				# Copy the region from the original frame
+				if original_texture is AtlasTexture:
+					new_atlas.region = original_texture.region
+				else:
+					# Fallback: assume standard 32x32 frames
+					new_atlas.region = Rect2(i * 32, 0, 32, 32)
+				
+				# Update the frame
+				sprite.sprite_frames.set_frame(anim_name, i, new_atlas)
+	
+	print("Character sprite loaded successfully!")
 
-	if x == 0.0:
-		x = Input.get_axis("ui_left", "ui_right")
-	if y == 0.0:
-		y = Input.get_axis("ui_up", "ui_down")
+func _physics_process(_delta: float) -> void:
+	var x := Input.get_axis("ui_left", "ui_right")
+	var y := Input.get_axis("ui_up", "ui_down")
 
 	var dir := Vector2(x, y)
 

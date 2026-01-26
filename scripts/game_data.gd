@@ -5,10 +5,18 @@ const SAVE_FILE_PATH = "user://savegame.save"
 var player_data = {
 	"position_x": 0.0,
 	"position_y": 0.0,
-	"scene_path": "res://root_node.tscn"
+	"scene_path": "res://root_node.tscn",
+	"character_index": 0,
+	"character_name": "Aiden",
+	"character_sprite": "res://assets/characters/overworld/ow1.png"
 }
 
 var should_apply_on_ready = false
+
+# Current character selection
+var selected_character_index = 0
+var player_name = "Aiden"
+var player_sprite_path = "res://assets/characters/overworld/ow1.png"
 
 func save_game():
 	var save_file = FileAccess.open(SAVE_FILE_PATH, FileAccess.WRITE)
@@ -22,8 +30,11 @@ func save_game():
 		player_data.position_x = player.global_position.x
 		player_data.position_y = player.global_position.y
 	
-	# Save current scene
+	# Save current scene and character info
 	player_data.scene_path = get_tree().current_scene.scene_file_path
+	player_data.character_index = selected_character_index
+	player_data.character_name = player_name
+	player_data.character_sprite = player_sprite_path
 	
 	# Convert to JSON and save
 	var json_string = JSON.stringify(player_data)
@@ -54,6 +65,12 @@ func load_game():
 		return false
 	
 	player_data = json.data
+	
+	# Restore character selection
+	selected_character_index = player_data.get("character_index", 0)
+	player_name = player_data.get("character_name", "Aiden")
+	player_sprite_path = player_data.get("character_sprite", "res://assets/characters/overworld/ow1.png")
+	
 	print("Game loaded successfully!")
 	return true
 

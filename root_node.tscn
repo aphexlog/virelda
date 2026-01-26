@@ -1107,7 +1107,7 @@ y_sort_enabled = true
 show_behind_parent = true
 position = Vector2(-25, 73)
 
-[node name="Tree" parent="Node2D" instance=ExtResource("3_oetci")]
-position = Vector2(-246, 36)
-
 [node name="PauseMenu" parent="." instance=ExtResource("4_pause")]
+
+[node name="Tree" parent="." instance=ExtResource("3_oetci")]
+position = Vector2(-112, 6)
