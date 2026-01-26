@@ -20,10 +20,11 @@ func _on_resume_pressed():
 	get_tree().paused = false
 
 func _on_save_pressed():
-	# TODO: Implement save system
-	print("Game saved!")
-	# For now, just show a brief confirmation
-	pass
+	if GameData.save_game():
+		# TODO: Show a visual confirmation (like a popup or label)
+		print("Game saved!")
+	else:
+		print("Failed to save game")
 
 func _on_main_menu_pressed():
 	get_tree().paused = false
