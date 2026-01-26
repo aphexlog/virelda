@@ -154,7 +154,7 @@ animations = [{
 size = Vector2(11, 8)
 
 [node name="Player" type="Node2D"]
-z_index = 11
+y_sort_enabled = true
 
 [node name="CharacterBody2D" type="CharacterBody2D" parent="."]
 script = ExtResource("1_g2els")
@@ -167,6 +167,7 @@ animation = &"walk_left"
 autoplay = "Idol"
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="CharacterBody2D"]
+visible = false
 position = Vector2(0, -5)
 shape = SubResource("RectangleShape2D_g2els")
 
