@@ -73,10 +73,6 @@ size_flags_horizontal = 3
 [node name="ButtonMenu" type="VBoxContainer" parent="Content/VBoxContainer/HBoxContainer"]
 layout_mode = 2
 
-[node name="RightSpacer" type="Control" parent="Content/VBoxContainer/HBoxContainer"]
-layout_mode = 2
-size_flags_horizontal = 3
-
 [node name="NewGameButton" type="Button" parent="Content/VBoxContainer/HBoxContainer/ButtonMenu"]
 layout_mode = 2
 focus_mode = 0
@@ -94,6 +90,10 @@ layout_mode = 2
 focus_mode = 0
 theme = ExtResource("3_w8uqo")
 text = "Credits"
+
+[node name="RightSpacer" type="Control" parent="Content/VBoxContainer/HBoxContainer"]
+layout_mode = 2
+size_flags_horizontal = 3
 
 [node name="Version Number" type="Label" parent="."]
 layout_mode = 0

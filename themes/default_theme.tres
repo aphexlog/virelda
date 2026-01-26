@@ -1,15 +1,22 @@
-[gd_resource type="Theme" load_steps=3 format=3 uid="uid://cg1k1l2re7soi"]
+[gd_resource type="Theme" load_steps=5 format=3 uid="uid://cg1k1l2re7soi"]
 
 [ext_resource type="FontFile" uid="uid://r0maixtbrsdt" path="res://fonts/Sniglet Regular.ttf" id="1_mlkpy"]
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_het5a"]
+draw_center = false
 
 [sub_resource type="StyleBoxFlat" id="StyleBoxFlat_mlkpy"]
 bg_color = Color(0.121569, 0.368627, 0.231373, 1)
 draw_center = false
 
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_lkf7m"]
+draw_center = false
+
 [resource]
 default_font_size = 23
-Button/colors/font_color = Color(0.83, 0.83, 0.83, 1)
+Button/colors/font_color = Color(0.104107, 0.32, 0.0256, 0.67451)
+Button/colors/font_hover_color = Color(0.407843, 0.94902, 0.227451, 1)
 Button/fonts/font = ExtResource("1_mlkpy")
-Button/styles/hover = null
+Button/styles/hover = SubResource("StyleBoxFlat_het5a")
 Button/styles/normal = SubResource("StyleBoxFlat_mlkpy")
-Button/styles/pressed = null
+Button/styles/pressed = SubResource("StyleBoxFlat_lkf7m")
