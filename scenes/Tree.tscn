@@ -17,13 +17,15 @@ size = Vector2(10.0003, 10.5)
 y_sort_enabled = true
 
 [node name="TrunkSprite" type="Sprite2D" parent="."]
-position = Vector2(-6.01853e-36, -15)
+y_sort_enabled = true
+position = Vector2(0, -15)
 scale = Vector2(1.20192, 1.215)
 texture = SubResource("AtlasTexture_dn7q5")
 offset = Vector2(2.95587e-15, 3.29218)
 
 [node name="CanopySprite" type="Sprite2D" parent="."]
-position = Vector2(0, -16.3045)
+y_sort_enabled = true
+position = Vector2(0, -15)
 scale = Vector2(1.04567, 1.25118)
 texture = SubResource("AtlasTexture_72j6q")
 offset = Vector2(3.8147e-05, -19.8551)
