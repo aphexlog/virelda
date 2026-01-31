@@ -1,4 +1,4 @@
-[gd_scene load_steps=23 format=3 uid="uid://dy2hpk8gq08qw"]
+[gd_scene load_steps=22 format=3 uid="uid://dy2hpk8gq08qw"]
 
 [ext_resource type="Texture2D" uid="uid://cosl0eleadgko" path="res://assets/characters/overworld/ow1.png" id="1_3vyb7"]
 [ext_resource type="Script" uid="uid://c7eedlfgnmpek" path="res://scenes/character_body_2d.gd" id="1_g2els"]
@@ -150,15 +150,6 @@ animations = [{
 "speed": 5.0
 }]
 
-[sub_resource type="Environment" id="Environment_g2els"]
-ssao_radius = 2.0
-glow_enabled = true
-glow_intensity = 4.8
-glow_strength = 1.43
-glow_bloom = 1.0
-glow_hdr_threshold = 4.0
-glow_hdr_luminance_cap = 21.5
-
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_g2els"]
 size = Vector2(11, 8)
 
@@ -174,9 +165,6 @@ position = Vector2(0, -16)
 sprite_frames = SubResource("SpriteFrames_fulsm")
 animation = &"walk_left"
 autoplay = "Idol"
-
-[node name="WorldEnvironment" type="WorldEnvironment" parent="CharacterBody2D/AnimatedSprite2D"]
-environment = SubResource("Environment_g2els")
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="CharacterBody2D"]
 visible = false
