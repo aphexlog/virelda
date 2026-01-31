@@ -5,7 +5,7 @@ extends CharacterBody2D
 
 var steps_taken: int = 0
 var step_timer: float = 0.0
-var step_interval: float = 2.0  # Check every 2 seconds of movement
+var step_interval: float = 1.5  # Check every 1.5 seconds of movement
 
 func _ready():
 	add_to_group("player")
@@ -80,8 +80,8 @@ func _physics_process(_delta: float) -> void:
 	update_animation(dir)
 
 func check_encounter():
-	# Balanced encounter rate - 15% chance every 2 seconds of walking
-	if randf() < 0.15:
+	# More frequent encounters - 25% chance every 1.5 seconds of walking
+	if randf() < 0.25:
 		print("Battle triggered!")
 		trigger_battle()
 
