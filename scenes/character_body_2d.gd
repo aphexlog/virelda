@@ -91,14 +91,12 @@ func trigger_battle():
 		print("No creature in party!")
 		return
 	
-	# Store battle data and switch to battle scene
-	get_tree().change_scene_to_file("res://scenes/battle_scene.tscn")
-	await get_tree().process_frame
+	# Store battle data in GameData for scene transition
+	GameData.pending_battle_player_creature = player_creature
+	GameData.pending_battle_enemy_creature = wild_creature
 	
-	# Get battle scene and start battle
-	var battle_scene = get_tree().current_scene
-	if battle_scene.has_method("start_battle"):
-		battle_scene.start_battle(player_creature, wild_creature)
+	# Switch to battle scene
+	get_tree().change_scene_to_file("res://scenes/battle_scene.tscn")
 
 
 func update_animation(dir: Vector2) -> void:

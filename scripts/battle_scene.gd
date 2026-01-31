@@ -36,6 +36,15 @@ func _ready():
 	# Load random background
 	var bg_num = randi_range(1, 3)
 	background.texture = load("res://assets/backgrounds/background%d.png" % bg_num)
+	
+	# Start battle with pending creatures from GameData
+	if GameData.pending_battle_player_creature and GameData.pending_battle_enemy_creature:
+		start_battle(GameData.pending_battle_player_creature, GameData.pending_battle_enemy_creature)
+		# Clear pending data
+		GameData.pending_battle_player_creature = null
+		GameData.pending_battle_enemy_creature = null
+	else:
+		print("ERROR: No pending battle data!")
 
 func load_vfx():
 	for i in range(1, 8):

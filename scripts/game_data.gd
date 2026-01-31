@@ -22,16 +22,20 @@ var player_sprite_path = "res://assets/characters/overworld/ow1.png"
 var player_party: Array[Creature] = []
 var active_creature_index: int = 0
 
+# Battle data - temporary storage for scene transitions
+var pending_battle_player_creature: Creature = null
+var pending_battle_enemy_creature: Creature = null
+
 func _ready():
-	# Give player a starter creature
-	if player_party.is_empty():
-		var starter = CreatureDB.get_creature_by_name("Flamewing", 5)
-		if starter:
-			player_party.append(starter)
+	# Don't auto-add starter - player will choose one
+	print("GameData._ready() called")
+	print("Player party size: ", player_party.size())
 
 func get_active_creature() -> Creature:
 	if player_party.is_empty():
+		print("ERROR: Player party is empty!")
 		return null
+	print("Getting active creature: ", player_party[active_creature_index].species.species_name)
 	return player_party[active_creature_index]
 
 func add_creature_to_party(creature: Creature):

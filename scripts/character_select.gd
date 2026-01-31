@@ -87,5 +87,5 @@ func _on_confirm_pressed():
 	GameData.player_name = characters[selected_index][1]
 	GameData.player_sprite_path = characters[selected_index][0]
 	
-	# Start the game
-	get_tree().change_scene_to_file("res://root_node.tscn")
+	# Go to starter creature selection
+	get_tree().change_scene_to_file("res://scenes/ui/starter_select.tscn")

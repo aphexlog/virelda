@@ -4,7 +4,9 @@ extends Node
 var creature_species = {}
 
 func _ready():
+	print("CreatureDB._ready() called")
 	load_creatures()
+	print("Loaded ", creature_species.size(), " creature species")
 
 func load_creatures():
 	# Load all 16 creatures with stats
