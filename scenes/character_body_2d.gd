@@ -10,6 +10,12 @@ var step_interval: float = 2.0  # Check every 2 seconds of movement
 func _ready():
 	add_to_group("player")
 	
+	# Set spawn position for level scaling (only once)
+	if not GameData.spawn_position_set:
+		GameData.spawn_position = global_position
+		GameData.spawn_position_set = true
+		print("Spawn position set to: ", GameData.spawn_position)
+	
 	# Apply selected character sprite
 	load_character_sprite()
 	
@@ -80,12 +86,16 @@ func check_encounter():
 		trigger_battle()
 
 func trigger_battle():
-	var wild_creature = CreatureDB.get_random_creature(3, 7)
+	# Calculate wild creature level based on distance from spawn
+	var wild_level = GameData.calculate_wild_creature_level(global_position)
+	var wild_creature = CreatureDB.get_random_creature(wild_level, wild_level)
 	var player_creature = GameData.get_active_creature()
 	
 	if player_creature == null:
 		print("No creature in party!")
 		return
+	
+	print("Wild level %d creature appeared at distance: %d" % [wild_level, int(global_position.distance_to(GameData.spawn_position))])
 	
 	# Store battle data in GameData for scene transition
 	GameData.pending_battle_player_creature = player_creature

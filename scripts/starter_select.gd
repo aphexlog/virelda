@@ -32,12 +32,12 @@ func choose_starter(index: int):
 	var starter_name = starters[index]
 	print("Chose starter: ", starter_name)
 	
-	# Create the starter creature and add to party
-	var starter = CreatureDB.get_creature_by_name(starter_name, 5)
+	# Create the starter creature at level 1
+	var starter = CreatureDB.get_creature_by_name(starter_name, 1)
 	if starter:
 		GameData.player_party.clear()  # Clear any existing creatures
 		GameData.player_party.append(starter)
-		print("Added ", starter.species.species_name, " to party!")
+		print("Added ", starter.species.species_name, " level ", starter.level, " to party!")
 	
 	# Start the game
 	get_tree().change_scene_to_file("res://root_node.tscn")

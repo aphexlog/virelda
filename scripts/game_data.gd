@@ -22,6 +22,10 @@ var player_sprite_path = "res://assets/characters/overworld/ow1.png"
 var player_party: Array[Creature] = []
 var active_creature_index: int = 0
 
+# Starting position for level scaling
+var spawn_position: Vector2 = Vector2.ZERO
+var spawn_position_set: bool = false
+
 # Battle data - temporary storage for scene transitions
 var pending_battle_player_creature: Creature = null
 var pending_battle_enemy_creature: Creature = null
@@ -41,6 +45,20 @@ func get_active_creature() -> Creature:
 func add_creature_to_party(creature: Creature):
 	if player_party.size() < 6:
 		player_party.append(creature)
+
+func calculate_wild_creature_level(player_position: Vector2) -> int:
+	# Calculate distance from spawn point
+	if not spawn_position_set:
+		return 1  # Default to level 1 if spawn not set
+	
+	var distance = player_position.distance_to(spawn_position)
+	
+	# Every 200 pixels of distance = 1 level
+	# Minimum level 1, maximum level 20
+	var level = int(distance / 200.0) + 1
+	level = clamp(level, 1, 20)
+	
+	return level
 
 func save_game():
 	var save_file = FileAccess.open(SAVE_FILE_PATH, FileAccess.WRITE)

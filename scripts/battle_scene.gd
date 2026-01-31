@@ -202,7 +202,14 @@ func battle_won():
 	battle_active = false
 	disable_menu()
 	show_message("You won! %s fainted!" % enemy_creature.species.species_name)
+	await get_tree().create_timer(1.5).timeout
+	
+	# Give experience based on enemy level
+	var exp_gained = enemy_creature.level * 15
+	player_creature.gain_experience(exp_gained)
+	show_message("%s gained %d EXP!" % [player_creature.species.species_name, exp_gained])
 	await get_tree().create_timer(2.0).timeout
+	
 	end_battle()
 
 func battle_lost():
