@@ -18,8 +18,11 @@ func _ready():
 		var sprite = container.get_node("VBoxContainer/CenterContainer/Sprite")
 		var button = container.get_node("VBoxContainer/Button")
 		
-		# Load sprite
-		sprite.texture = load(creature_data.sprite_idle)
+		# Load sprite - use AtlasTexture to show only first frame
+		var atlas = AtlasTexture.new()
+		atlas.atlas = load(creature_data.sprite_idle)
+		atlas.region = Rect2(0, 0, 96, 96)  # First frame only
+		sprite.texture = atlas
 		
 		# Connect button
 		var callable = func(index = i): choose_starter(index)

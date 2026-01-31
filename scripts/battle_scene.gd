@@ -61,13 +61,19 @@ func start_battle(player_creature_data: Creature, enemy_creature_data: Creature)
 
 func setup_ui():
 	# Player creature
-	player_sprite.texture = load(player_creature.species.sprite_idle)
+	var player_atlas = AtlasTexture.new()
+	player_atlas.atlas = load(player_creature.species.sprite_idle)
+	player_atlas.region = Rect2(0, 0, 96, 96)  # First frame only
+	player_sprite.texture = player_atlas
 	player_name_label.text = player_creature.species.species_name
 	player_level_label.text = "Lv. %d" % player_creature.level
 	update_player_hp()
 	
 	# Enemy creature
-	enemy_sprite.texture = load(enemy_creature.species.sprite_idle)
+	var enemy_atlas = AtlasTexture.new()
+	enemy_atlas.atlas = load(enemy_creature.species.sprite_idle)
+	enemy_atlas.region = Rect2(0, 0, 96, 96)  # First frame only
+	enemy_sprite.texture = enemy_atlas
 	enemy_name_label.text = enemy_creature.species.species_name
 	enemy_level_label.text = "Lv. %d" % enemy_creature.level
 	update_enemy_hp()
@@ -110,7 +116,10 @@ func player_attack():
 	show_message("%s attacks!" % player_creature.species.species_name)
 	
 	# Show attack animation
-	player_sprite.texture = load(player_creature.species.sprite_attack)
+	var attack_atlas = AtlasTexture.new()
+	attack_atlas.atlas = load(player_creature.species.sprite_attack)
+	attack_atlas.region = Rect2(0, 0, 96, 96)
+	player_sprite.texture = attack_atlas
 	await get_tree().create_timer(0.3).timeout
 	
 	# Show VFX on enemy
@@ -124,7 +133,10 @@ func player_attack():
 	show_message("%s dealt %d damage!" % [player_creature.species.species_name, damage])
 	
 	# Reset sprite
-	player_sprite.texture = load(player_creature.species.sprite_idle)
+	var idle_atlas = AtlasTexture.new()
+	idle_atlas.atlas = load(player_creature.species.sprite_idle)
+	idle_atlas.region = Rect2(0, 0, 96, 96)
+	player_sprite.texture = idle_atlas
 	await get_tree().create_timer(0.5).timeout
 	
 	# Check if enemy fainted
@@ -137,7 +149,10 @@ func enemy_attack():
 	show_message("%s attacks!" % enemy_creature.species.species_name)
 	
 	# Show attack animation
-	enemy_sprite.texture = load(enemy_creature.species.sprite_attack)
+	var attack_atlas = AtlasTexture.new()
+	attack_atlas.atlas = load(enemy_creature.species.sprite_attack)
+	attack_atlas.region = Rect2(0, 0, 96, 96)
+	enemy_sprite.texture = attack_atlas
 	await get_tree().create_timer(0.3).timeout
 	
 	# Show VFX on player
@@ -151,7 +166,10 @@ func enemy_attack():
 	show_message("%s dealt %d damage!" % [enemy_creature.species.species_name, damage])
 	
 	# Reset sprite
-	enemy_sprite.texture = load(enemy_creature.species.sprite_idle)
+	var idle_atlas = AtlasTexture.new()
+	idle_atlas.atlas = load(enemy_creature.species.sprite_idle)
+	idle_atlas.region = Rect2(0, 0, 96, 96)
+	enemy_sprite.texture = idle_atlas
 	await get_tree().create_timer(0.5).timeout
 	
 	# Check if player fainted
