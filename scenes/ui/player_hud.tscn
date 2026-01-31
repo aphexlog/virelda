@@ -1,0 +1,39 @@
+[gd_scene load_steps=4 format=3 uid="uid://e6b15qy52u80"]
+
+[ext_resource type="Script" path="res://scripts/player_hud.gd" id="1_hud"]
+[ext_resource type="Texture2D" uid="uid://d4157g4lmu71x" path="res://assets/ui/options8.png" id="2_coin"]
+[ext_resource type="FontFile" uid="uid://r0maixtbrsdt" path="res://fonts/Sniglet Regular.ttf" id="3_font"]
+
+[node name="PlayerHUD" type="CanvasLayer"]
+script = ExtResource("1_hud")
+
+[node name="TopBar" type="MarginContainer" parent="."]
+anchors_preset = 10
+anchor_right = 1.0
+offset_bottom = 40.0
+grow_horizontal = 2
+theme_override_constants/margin_left = 10
+theme_override_constants/margin_top = 10
+theme_override_constants/margin_right = 10
+
+[node name="HBoxContainer" type="HBoxContainer" parent="TopBar"]
+layout_mode = 2
+theme_override_constants/separation = 15
+
+[node name="CoinDisplay" type="HBoxContainer" parent="TopBar/HBoxContainer"]
+layout_mode = 2
+theme_override_constants/separation = 5
+
+[node name="CoinIcon" type="TextureRect" parent="TopBar/HBoxContainer/CoinDisplay"]
+custom_minimum_size = Vector2(24, 24)
+layout_mode = 2
+texture = ExtResource("2_coin")
+expand_mode = 1
+stretch_mode = 5
+
+[node name="CoinLabel" type="Label" parent="TopBar/HBoxContainer/CoinDisplay"]
+layout_mode = 2
+theme_override_fonts/font = ExtResource("3_font")
+theme_override_font_sizes/font_size = 18
+text = "100"
+vertical_alignment = 1

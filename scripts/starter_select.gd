@@ -29,15 +29,41 @@ func _ready():
 		button.pressed.connect(callable)
 
 func choose_starter(index: int):
+	print("=== CHOOSE_STARTER CALLED ===")
+	print("Index: ", index)
+	
 	var starter_name = starters[index]
 	print("Chose starter: ", starter_name)
 	
 	# Create the starter creature at level 1
 	var starter = CreatureDB.get_creature_by_name(starter_name, 1)
-	if starter:
-		GameData.player_party.clear()  # Clear any existing creatures
-		GameData.player_party.append(starter)
-		print("Added ", starter.species.species_name, " level ", starter.level, " to party!")
 	
-	# Start the game
-	get_tree().change_scene_to_file("res://root_node.tscn")
+	if starter:
+		GameData.player_party.clear()
+		GameData.player_party.append(starter)
+		GameData.active_creature_index = 0
+		print("Added ", starter.species.species_name, " level ", starter.level, " to party!")
+		
+		# Check if file exists
+		print("Checking if root_node.tscn exists...")
+		if FileAccess.file_exists("res://root_node.tscn"):
+			print("File exists!")
+		else:
+			print("File does NOT exist!")
+		
+		# Try to load the scene
+		print("Attempting to load scene...")
+		var game_scene = load("res://root_node.tscn")
+		print("Load returned: ", game_scene)
+		print("Game scene type: ", typeof(game_scene))
+		
+		if game_scene != null:
+			print("Scene loaded successfully, changing scene...")
+			var error = get_tree().change_scene_to_packed(game_scene)
+			print("change_scene_to_packed returned: ", error)
+			if error != OK:
+				push_error("Failed to change scene! Error code: " + str(error))
+		else:
+			push_error("Failed to load root_node.tscn - returned null!")
+	else:
+		push_error("Failed to create starter creature: " + starter_name)

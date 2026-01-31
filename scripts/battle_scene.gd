@@ -25,6 +25,7 @@ var last_type_multiplier: float = 1.0
 
 @onready var message_label = $UI/MessageBox/MarginContainer/MessageLabel
 @onready var attack_button = $UI/BattleMenu/MarginContainer/VBoxContainer/AttackButton
+@onready var items_button = $UI/BattleMenu/MarginContainer/VBoxContainer/ItemsButton
 @onready var run_button = $UI/BattleMenu/MarginContainer/VBoxContainer/RunButton
 
 var vfx_textures = []
@@ -32,6 +33,7 @@ var vfx_textures = []
 func _ready():
 	load_vfx()
 	attack_button.pressed.connect(_on_attack_pressed)
+	items_button.pressed.connect(_on_items_pressed)
 	run_button.pressed.connect(_on_run_pressed)
 	
 	# Load random background
@@ -92,11 +94,52 @@ func show_message(text: String):
 
 func disable_menu():
 	attack_button.disabled = true
+	items_button.disabled = true
 	run_button.disabled = true
 
 func enable_menu():
 	attack_button.disabled = false
+	items_button.disabled = false
 	run_button.disabled = false
+
+func _on_items_pressed():
+	if not battle_active:
+		return
+	
+	disable_menu()
+	
+	# Show available potions
+	var available_potions = []
+	for item_name in GameData.inventory.keys():
+		if item_name.contains("Potion"):
+			available_potions.append(item_name)
+	
+	if available_potions.is_empty():
+		show_message("You have no items to use!")
+		await get_tree().create_timer(1.0).timeout
+		enable_menu()
+		return
+	
+	# For now, use the first available potion (we'll make a proper menu later)
+	var potion = available_potions[0]
+	var item_data = ItemDB.get_item(potion)
+	
+	if item_data:
+		# Use the potion
+		var heal_amount = min(item_data.effect_value, player_creature.max_hp - player_creature.current_hp)
+		player_creature.current_hp += heal_amount
+		update_player_hp()
+		
+		GameData.remove_item(potion, 1)
+		show_message("Used %s! Restored %d HP!" % [potion, heal_amount])
+		await get_tree().create_timer(1.5).timeout
+		
+		# Enemy attacks after using item
+		await enemy_attack()
+		if battle_active:
+			enable_menu()
+	else:
+		enable_menu()
 
 func _on_attack_pressed():
 	if not battle_active or not player_turn:
@@ -232,11 +275,34 @@ func battle_won():
 	var exp_gained = enemy_creature.level * 15
 	player_creature.gain_experience(exp_gained)
 	show_message("%s gained %d EXP!" % [player_creature.species.species_name, exp_gained])
-	await get_tree().create_timer(2.0).timeout
+	await get_tree().create_timer(1.5).timeout
+	
+	# Give coins based on enemy level (more coins = more fun!)
+	var coins_won = enemy_creature.level * 10 + randi_range(5, 15)
+	GameData.add_coins(coins_won)
+	show_message("You found %d coins!" % coins_won)
+	await get_tree().create_timer(1.5).timeout
+	
+	# Random chance for item drop (30% chance - makes winning exciting!)
+	if randf() < 0.3:
+		var item_drop = get_random_item_drop()
+		GameData.add_item(item_drop, 1)
+		show_message("You found a %s!" % item_drop)
+		await get_tree().create_timer(1.5).timeout
 	
 	# Set battle result to won
 	GameData.battle_result = "won"
 	end_battle()
+
+func get_random_item_drop() -> String:
+	# Higher level enemies drop better items
+	var roll = randf()
+	if enemy_creature.level >= 15 and roll < 0.2:
+		return "Large Potion"
+	elif enemy_creature.level >= 8 and roll < 0.5:
+		return "Medium Potion"
+	else:
+		return "Small Potion"
 
 func battle_lost():
 	battle_active = false

@@ -250,13 +250,19 @@ theme_override_constants/separation = 8
 custom_minimum_size = Vector2(0, 30)
 layout_mode = 2
 theme = ExtResource("3_theme")
-text = "Attack"
+text = "⚔️ Attack"
+
+[node name="ItemsButton" type="Button" parent="UI/BattleMenu/MarginContainer/VBoxContainer"]
+custom_minimum_size = Vector2(0, 30)
+layout_mode = 2
+theme = ExtResource("3_theme")
+text = "🧪 Items"
 
 [node name="RunButton" type="Button" parent="UI/BattleMenu/MarginContainer/VBoxContainer"]
 custom_minimum_size = Vector2(0, 30)
 layout_mode = 2
 theme = ExtResource("3_theme")
-text = "Run"
+text = "🏃 Run"
 
 [node name="MessageBox" type="PanelContainer" parent="UI"]
 layout_mode = 1

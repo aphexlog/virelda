@@ -20,6 +20,7 @@ config/icon="res://icon.svg"
 GameData="*res://scripts/game_data.gd"
 CreatureDB="*res://scripts/creature_database.gd"
 TypeSystem="*res://scripts/type_system.gd"
+ItemDB="*res://scripts/item_database.gd"
 
 [display]
 
