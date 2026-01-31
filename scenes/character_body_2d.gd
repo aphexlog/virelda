@@ -3,14 +3,35 @@ extends CharacterBody2D
 @export var speed: float = 100.0
 @onready var sprite: AnimatedSprite2D = $AnimatedSprite2D
 
+var steps_taken: int = 0
+var step_timer: float = 0.0
+var step_interval: float = 1.5  # Check every 1.5 seconds of movement
+
 func _ready():
 	add_to_group("player")
+	
+	# Set spawn position for level scaling (only once)
+	if not GameData.spawn_position_set:
+		GameData.spawn_position = global_position
+		GameData.spawn_position_set = true
+		print("Spawn position set to: ", GameData.spawn_position)
 	
 	# Apply selected character sprite
 	load_character_sprite()
 	
+	# Check battle result and position player accordingly
+	if GameData.battle_result == "lost":
+		# Player lost - return to spawn
+		global_position = GameData.spawn_position
+		print("Returned to spawn after losing battle")
+		GameData.battle_result = ""
+	elif GameData.battle_result == "won" or GameData.battle_result == "ran":
+		# Player won or ran - return to position before battle
+		global_position = GameData.position_before_battle
+		print("Returned to battle position after victory/escape")
+		GameData.battle_result = ""
 	# Apply loaded position if loading a save
-	if GameData.should_apply_on_ready:
+	elif GameData.should_apply_on_ready:
 		global_position = Vector2(GameData.player_data.position_x, GameData.player_data.position_y)
 		GameData.should_apply_on_ready = false
 		print("Loaded player position: ", global_position)
@@ -58,9 +79,44 @@ func _physics_process(_delta: float) -> void:
 		dir = dir.normalized()
 
 	velocity = dir * speed
-	move_and_slide()
+	var is_moving = move_and_slide()
+	
+	# Check for random encounters while player is moving
+	if velocity.length() > 0:
+		step_timer += _delta
+		if step_timer >= step_interval:
+			step_timer = 0.0
+			check_encounter()
 
 	update_animation(dir)
+
+func check_encounter():
+	# More frequent encounters - 25% chance every 1.5 seconds of walking
+	if randf() < 0.25:
+		print("Battle triggered!")
+		trigger_battle()
+
+func trigger_battle():
+	# Save current position before battle
+	GameData.position_before_battle = global_position
+	
+	# Calculate wild creature level based on distance from spawn
+	var wild_level = GameData.calculate_wild_creature_level(global_position)
+	var wild_creature = CreatureDB.get_random_creature(wild_level, wild_level)
+	var player_creature = GameData.get_active_creature()
+	
+	if player_creature == null:
+		print("No creature in party!")
+		return
+	
+	print("Wild level %d creature appeared at distance: %d" % [wild_level, int(global_position.distance_to(GameData.spawn_position))])
+	
+	# Store battle data in GameData for scene transition
+	GameData.pending_battle_player_creature = player_creature
+	GameData.pending_battle_enemy_creature = wild_creature
+	
+	# Switch to battle scene
+	get_tree().change_scene_to_file("res://scenes/battle_scene.tscn")
 
 
 func update_animation(dir: Vector2) -> void:
