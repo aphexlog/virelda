@@ -82,7 +82,7 @@ horizontal_alignment = 1
 [node name="Type" type="Label" parent="MarginContainer/VBoxContainer/HBoxContainer/Starter1/VBoxContainer"]
 layout_mode = 2
 theme_override_font_sizes/font_size = 12
-text = "Fire Type"
+text = "Grass Type"
 horizontal_alignment = 1
 
 [node name="Button" type="Button" parent="MarginContainer/VBoxContainer/HBoxContainer/Starter1/VBoxContainer"]
@@ -110,13 +110,13 @@ expand_mode = 1
 layout_mode = 2
 theme_override_fonts/font = ExtResource("3_font")
 theme_override_font_sizes/font_size = 16
-text = "Aquaveil"
+text = "Shadowclaw"
 horizontal_alignment = 1
 
 [node name="Type" type="Label" parent="MarginContainer/VBoxContainer/HBoxContainer/Starter2/VBoxContainer"]
 layout_mode = 2
 theme_override_font_sizes/font_size = 12
-text = "Water Type"
+text = "Fire Type"
 horizontal_alignment = 1
 
 [node name="Button" type="Button" parent="MarginContainer/VBoxContainer/HBoxContainer/Starter2/VBoxContainer"]
@@ -144,13 +144,13 @@ expand_mode = 1
 layout_mode = 2
 theme_override_fonts/font = ExtResource("3_font")
 theme_override_font_sizes/font_size = 16
-text = "Leafwhisper"
+text = "Thunderfang"
 horizontal_alignment = 1
 
 [node name="Type" type="Label" parent="MarginContainer/VBoxContainer/HBoxContainer/Starter3/VBoxContainer"]
 layout_mode = 2
 theme_override_font_sizes/font_size = 12
-text = "Grass Type"
+text = "Water Type"
 horizontal_alignment = 1
 
 [node name="Button" type="Button" parent="MarginContainer/VBoxContainer/HBoxContainer/Starter3/VBoxContainer"]

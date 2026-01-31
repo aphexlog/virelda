@@ -48,6 +48,35 @@ func level_up():
 	# Heal the difference when leveling up
 	current_hp += (max_hp - old_max_hp)
 	current_hp = min(current_hp, max_hp)
+	
+	# Check for evolution
+	check_evolution()
+
+func check_evolution():
+	# Check if this creature can evolve
+	if CreatureDB.evolution_chains.has(species.species_name):
+		var evo_data = CreatureDB.evolution_chains[species.species_name]
+		if level >= evo_data["evolves_at"]:
+			evolve_to(evo_data["evolves_to"])
+
+func evolve_to(new_species_name: String):
+	print("%s is evolving..." % species.species_name)
+	
+	# Get new species data
+	var new_species = CreatureDB.creature_species[new_species_name]
+	if new_species:
+		# Store old HP percentage
+		var hp_percent = float(current_hp) / float(max_hp)
+		
+		# Evolve!
+		species = new_species
+		calculate_stats()
+		
+		# Restore HP based on percentage
+		current_hp = int(max_hp * hp_percent)
+		current_hp = max(1, current_hp)
+		
+		print("Congratulations! Your creature evolved into %s!" % species.species_name)
 
 func take_damage(damage: int):
 	var actual_damage = max(1, damage - (defense / 4))

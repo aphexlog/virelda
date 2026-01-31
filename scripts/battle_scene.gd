@@ -6,6 +6,7 @@ var player_creature: Creature
 var enemy_creature: Creature
 var battle_active: bool = false
 var player_turn: bool = true
+var last_type_multiplier: float = 1.0
 
 @onready var player_sprite = $BattleArea/PlayerPosition/PlayerSprite
 @onready var enemy_sprite = $BattleArea/EnemyPosition/EnemySprite
@@ -65,7 +66,7 @@ func setup_ui():
 	player_atlas.atlas = load(player_creature.species.sprite_idle)
 	player_atlas.region = Rect2(0, 0, 96, 96)  # First frame only
 	player_sprite.texture = player_atlas
-	player_name_label.text = player_creature.species.species_name
+	player_name_label.text = "%s (%s)" % [player_creature.species.species_name, player_creature.species.creature_type.capitalize()]
 	player_level_label.text = "Lv. %d" % player_creature.level
 	update_player_hp()
 	
@@ -74,7 +75,7 @@ func setup_ui():
 	enemy_atlas.atlas = load(enemy_creature.species.sprite_idle)
 	enemy_atlas.region = Rect2(0, 0, 96, 96)  # First frame only
 	enemy_sprite.texture = enemy_atlas
-	enemy_name_label.text = enemy_creature.species.species_name
+	enemy_name_label.text = "%s (%s)" % [enemy_creature.species.species_name, enemy_creature.species.creature_type.capitalize()]
 	enemy_level_label.text = "Lv. %d" % enemy_creature.level
 	update_enemy_hp()
 
@@ -130,7 +131,14 @@ func player_attack():
 	enemy_creature.take_damage(damage)
 	update_enemy_hp()
 	
+	# Show damage and effectiveness
 	show_message("%s dealt %d damage!" % [player_creature.species.species_name, damage])
+	await get_tree().create_timer(1.0).timeout
+	
+	var effectiveness_msg = TypeSystem.get_effectiveness_text(last_type_multiplier)
+	if effectiveness_msg != "":
+		show_message(effectiveness_msg)
+		await get_tree().create_timer(1.0).timeout
 	
 	# Reset sprite
 	var idle_atlas = AtlasTexture.new()
@@ -163,7 +171,14 @@ func enemy_attack():
 	player_creature.take_damage(damage)
 	update_player_hp()
 	
+	# Show damage and effectiveness
 	show_message("%s dealt %d damage!" % [enemy_creature.species.species_name, damage])
+	await get_tree().create_timer(1.0).timeout
+	
+	var effectiveness_msg = TypeSystem.get_effectiveness_text(last_type_multiplier)
+	if effectiveness_msg != "":
+		show_message(effectiveness_msg)
+		await get_tree().create_timer(1.0).timeout
 	
 	# Reset sprite
 	var idle_atlas = AtlasTexture.new()
@@ -177,12 +192,21 @@ func enemy_attack():
 		await battle_lost()
 
 func calculate_damage(attacker: Creature, defender: Creature) -> int:
-	# Pokemon-like damage formula: more realistic damage calculation
-	# Damage = ((2 * Level / 5 + 2) * Attack / Defense) * random(0.85-1.0)
+	# Pokemon-like damage formula with type effectiveness
 	var level_modifier = (2.0 * attacker.level / 5.0 + 2.0)
 	var attack_defense_ratio = float(attacker.attack) / max(1.0, float(defender.defense))
-	var base_damage = level_modifier * attack_defense_ratio * 10.0  # Scale up for visibility
+	var base_damage = level_modifier * attack_defense_ratio * 10.0
+	
+	# Apply type effectiveness
+	var type_multiplier = TypeSystem.get_effectiveness(attacker.species.creature_type, defender.species.creature_type)
+	base_damage *= type_multiplier
+	
+	# Random variance
 	var damage = base_damage * randf_range(0.85, 1.0)
+	
+	# Store type multiplier for message display
+	last_type_multiplier = type_multiplier
+	
 	return max(1, int(damage))
 
 func play_vfx(position: Vector2):

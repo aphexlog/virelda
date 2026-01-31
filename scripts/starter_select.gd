@@ -3,9 +3,9 @@ extends Control
 # Starter selection screen - choose your first creature
 
 var starters = [
-	"Flamewing",   # Fire
-	"Aquaveil",    # Water
-	"Leafwhisper"  # Grass
+	"Flamewing",    # Grass (evolves to Aquaveil -> Terrabite)
+	"Shadowclaw",   # Fire (evolves to Crystalwing -> Blazeclaw)
+	"Thunderfang"   # Water (evolves to Vinelash -> Glacierfist)
 ]
 
 func _ready():
