@@ -17,10 +17,10 @@ func _init(creature_species: CreatureData, creature_level: int = 5):
 	current_hp = max_hp
 
 func calculate_stats():
-	# Simple stat calculation based on level
-	max_hp = species.base_hp + (level * 5)
-	attack = species.base_attack + (level * 2)
-	defense = species.base_defense + (level * 2)
+	# Pokemon-like stat calculation - much lower HP, higher attack/defense impact
+	max_hp = species.base_hp + (level * 2)  # Lower HP growth
+	attack = species.base_attack + (level * 3)  # Higher attack growth
+	defense = species.base_defense + (level * 3)  # Higher defense growth
 
 func take_damage(damage: int):
 	var actual_damage = max(1, damage - (defense / 4))

@@ -177,10 +177,13 @@ func enemy_attack():
 		await battle_lost()
 
 func calculate_damage(attacker: Creature, defender: Creature) -> int:
-	var base_damage = attacker.attack * 2
-	var defense_factor = max(1, defender.defense)
-	var damage = max(1, (base_damage / defense_factor) * randf_range(0.85, 1.0))
-	return int(damage)
+	# Pokemon-like damage formula: more realistic damage calculation
+	# Damage = ((2 * Level / 5 + 2) * Attack / Defense) * random(0.85-1.0)
+	var level_modifier = (2.0 * attacker.level / 5.0 + 2.0)
+	var attack_defense_ratio = float(attacker.attack) / max(1.0, float(defender.defense))
+	var base_damage = level_modifier * attack_defense_ratio * 10.0  # Scale up for visibility
+	var damage = base_damage * randf_range(0.85, 1.0)
+	return max(1, int(damage))
 
 func play_vfx(position: Vector2):
 	var vfx_texture = vfx_textures[randi() % vfx_textures.size()]
