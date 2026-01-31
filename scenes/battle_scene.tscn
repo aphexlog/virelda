@@ -1,4 +1,4 @@
-[gd_scene load_steps=5 format=3 uid="uid://c1m5n8p9r2q4k"]
+[gd_scene load_steps=5 format=3 uid="uid://c1m5n8qar2q4k"]
 
 [ext_resource type="Script" path="res://scripts/battle_scene.gd" id="1_battle"]
 [ext_resource type="FontFile" uid="uid://r0maixtbrsdt" path="res://fonts/Sniglet Regular.ttf" id="2_font"]

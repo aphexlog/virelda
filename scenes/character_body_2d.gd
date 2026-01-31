@@ -3,6 +3,10 @@ extends CharacterBody2D
 @export var speed: float = 100.0
 @onready var sprite: AnimatedSprite2D = $AnimatedSprite2D
 
+var steps_taken: int = 0
+var step_timer: float = 0.0
+var step_interval: float = 0.3  # Check every 0.3 seconds of movement
+
 func _ready():
 	add_to_group("player")
 	
@@ -53,24 +57,31 @@ func _physics_process(_delta: float) -> void:
 	var y := Input.get_axis("ui_up", "ui_down")
 
 	var dir := Vector2(x, y)
+	
+	# Debug: Check if moving
+	if dir.length() > 0:
+		print("Moving! Dir: ", dir, " Timer: ", step_timer)
 
 	if dir.length() > 1.0:
 		dir = dir.normalized()
 
-	var was_moving = velocity.length() > 0
 	velocity = dir * speed
 	var is_moving = move_and_slide()
 	
-	# Check for random encounters when player moves
-	if is_moving and not was_moving:
-		check_encounter()
+	# Check for random encounters while player is moving
+	if velocity.length() > 0:
+		step_timer += _delta
+		if step_timer >= step_interval:
+			step_timer = 0.0
+			print(">>> CALLING CHECK_ENCOUNTER <<<")
+			check_encounter()
 
 	update_animation(dir)
 
 func check_encounter():
-	# Random chance for battle
-	if randf() < 0.05:  # 5% chance per step
-		trigger_battle()
+	# GUARANTEED encounter for testing!
+	print("Battle triggered!")
+	trigger_battle()
 
 func trigger_battle():
 	var wild_creature = CreatureDB.get_random_creature(3, 7)
