@@ -234,6 +234,8 @@ func battle_won():
 	show_message("%s gained %d EXP!" % [player_creature.species.species_name, exp_gained])
 	await get_tree().create_timer(2.0).timeout
 	
+	# Set battle result to won
+	GameData.battle_result = "won"
 	end_battle()
 
 func battle_lost():
@@ -241,6 +243,9 @@ func battle_lost():
 	disable_menu()
 	show_message("You lost! %s fainted!" % player_creature.species.species_name)
 	await get_tree().create_timer(2.0).timeout
+	
+	# Set battle result to lost - player will return to spawn
+	GameData.battle_result = "lost"
 	end_battle()
 
 func _on_run_pressed():
@@ -253,6 +258,9 @@ func _on_run_pressed():
 	if randf() < 0.5:
 		show_message("Got away safely!")
 		await get_tree().create_timer(1.5).timeout
+		
+		# Set battle result to ran - stay at position before battle
+		GameData.battle_result = "ran"
 		end_battle()
 	else:
 		show_message("Can't escape!")

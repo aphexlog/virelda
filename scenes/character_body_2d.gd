@@ -19,8 +19,19 @@ func _ready():
 	# Apply selected character sprite
 	load_character_sprite()
 	
+	# Check battle result and position player accordingly
+	if GameData.battle_result == "lost":
+		# Player lost - return to spawn
+		global_position = GameData.spawn_position
+		print("Returned to spawn after losing battle")
+		GameData.battle_result = ""
+	elif GameData.battle_result == "won" or GameData.battle_result == "ran":
+		# Player won or ran - return to position before battle
+		global_position = GameData.position_before_battle
+		print("Returned to battle position after victory/escape")
+		GameData.battle_result = ""
 	# Apply loaded position if loading a save
-	if GameData.should_apply_on_ready:
+	elif GameData.should_apply_on_ready:
 		global_position = Vector2(GameData.player_data.position_x, GameData.player_data.position_y)
 		GameData.should_apply_on_ready = false
 		print("Loaded player position: ", global_position)
@@ -86,6 +97,9 @@ func check_encounter():
 		trigger_battle()
 
 func trigger_battle():
+	# Save current position before battle
+	GameData.position_before_battle = global_position
+	
 	# Calculate wild creature level based on distance from spawn
 	var wild_level = GameData.calculate_wild_creature_level(global_position)
 	var wild_creature = CreatureDB.get_random_creature(wild_level, wild_level)

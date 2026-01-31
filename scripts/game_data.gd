@@ -26,9 +26,13 @@ var active_creature_index: int = 0
 var spawn_position: Vector2 = Vector2.ZERO
 var spawn_position_set: bool = false
 
+# Current position before battle (for returning on loss)
+var position_before_battle: Vector2 = Vector2.ZERO
+
 # Battle data - temporary storage for scene transitions
 var pending_battle_player_creature: Creature = null
 var pending_battle_enemy_creature: Creature = null
+var battle_result: String = ""  # "won", "lost", or "ran"
 
 func _ready():
 	# Don't auto-add starter - player will choose one
