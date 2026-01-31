@@ -1,9 +1,10 @@
-[gd_scene load_steps=13 format=4 uid="uid://bt852bwrbn4vb"]
+[gd_scene load_steps=14 format=4 uid="uid://bt852bwrbn4vb"]
 
 [ext_resource type="Texture2D" uid="uid://do3feo4r2bles" path="res://assets/tilesets/tileset.png" id="1_v0vck"]
 [ext_resource type="PackedScene" uid="uid://dy2hpk8gq08qw" path="res://scenes/player.tscn" id="2_52tyj"]
 [ext_resource type="PackedScene" uid="uid://dxda1ptbamu2" path="res://scenes/Tree.tscn" id="3_oetci"]
 [ext_resource type="PackedScene" uid="uid://b2p8waxr4qw1k" path="res://scenes/ui/pause_menu.tscn" id="4_pause"]
+[ext_resource type="PackedScene" path="res://scenes/ui/cheat_menu.tscn" id="5_cheat"]
 
 [sub_resource type="TileSetAtlasSource" id="TileSetAtlasSource_52tyj"]
 texture = ExtResource("1_v0vck")
@@ -1129,6 +1130,8 @@ position = Vector2(40, -13)
 
 [node name="PauseMenu" parent="." instance=ExtResource("4_pause")]
 visible = false
+
+[node name="CheatMenu" parent="." instance=ExtResource("5_cheat")]
 
 [node name="Tree" parent="." instance=ExtResource("3_oetci")]
 position = Vector2(-135, -66)
