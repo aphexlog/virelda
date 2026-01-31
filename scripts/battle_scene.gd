@@ -238,5 +238,10 @@ func _on_run_pressed():
 			enable_menu()
 
 func end_battle():
+	# Heal player's creature after battle (full HP restore)
+	if player_creature:
+		player_creature.current_hp = player_creature.max_hp
+		print("%s fully healed!" % player_creature.species.species_name)
+	
 	# Return to overworld
 	get_tree().change_scene_to_file("res://root_node.tscn")
