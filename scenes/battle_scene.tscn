@@ -1,0 +1,287 @@
+[gd_scene load_steps=5 format=3 uid="uid://c1m5n8p9r2q4k"]
+
+[ext_resource type="Script" path="res://scripts/battle_scene.gd" id="1_battle"]
+[ext_resource type="FontFile" uid="uid://r0maixtbrsdt" path="res://fonts/Sniglet Regular.ttf" id="2_font"]
+[ext_resource type="Theme" uid="uid://cg1k1l2re7soi" path="res://themes/default_theme.tres" id="3_theme"]
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_hp"]
+bg_color = Color(0.2, 0.8, 0.2, 1)
+corner_radius_top_left = 3
+corner_radius_top_right = 3
+corner_radius_bottom_right = 3
+corner_radius_bottom_left = 3
+
+[node name="BattleScene" type="Control"]
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+script = ExtResource("1_battle")
+
+[node name="Background" type="TextureRect" parent="."]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+expand_mode = 5
+
+[node name="BattleArea" type="Control" parent="."]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="EnemyPosition" type="Control" parent="BattleArea"]
+layout_mode = 1
+anchors_preset = 5
+anchor_left = 0.5
+anchor_right = 0.5
+offset_left = -64.0
+offset_top = 60.0
+offset_right = 64.0
+offset_bottom = 188.0
+grow_horizontal = 2
+
+[node name="EnemySprite" type="TextureRect" parent="BattleArea/EnemyPosition"]
+texture_filter = 1
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -64.0
+offset_top = -64.0
+offset_right = 64.0
+offset_bottom = 64.0
+grow_horizontal = 2
+grow_vertical = 2
+expand_mode = 1
+
+[node name="PlayerPosition" type="Control" parent="BattleArea"]
+layout_mode = 1
+anchors_preset = 7
+anchor_left = 0.5
+anchor_top = 1.0
+anchor_right = 0.5
+anchor_bottom = 1.0
+offset_left = -64.0
+offset_top = -188.0
+offset_right = 64.0
+offset_bottom = -60.0
+grow_horizontal = 2
+grow_vertical = 0
+
+[node name="PlayerSprite" type="TextureRect" parent="BattleArea/PlayerPosition"]
+texture_filter = 1
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -64.0
+offset_top = -64.0
+offset_right = 64.0
+offset_bottom = 64.0
+grow_horizontal = 2
+grow_vertical = 2
+expand_mode = 1
+
+[node name="VFXLayer" type="Control" parent="BattleArea"]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+mouse_filter = 2
+
+[node name="AttackVFX" type="TextureRect" parent="BattleArea/VFXLayer"]
+visible = false
+texture_filter = 1
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -64.0
+offset_top = -64.0
+offset_right = 64.0
+offset_bottom = 64.0
+grow_horizontal = 2
+grow_vertical = 2
+expand_mode = 1
+
+[node name="UI" type="Control" parent="."]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+mouse_filter = 2
+
+[node name="EnemyInfo" type="PanelContainer" parent="UI"]
+layout_mode = 1
+anchors_preset = 1
+anchor_left = 1.0
+anchor_right = 1.0
+offset_left = -180.0
+offset_top = 20.0
+offset_right = -20.0
+offset_bottom = 100.0
+grow_horizontal = 0
+
+[node name="MarginContainer" type="MarginContainer" parent="UI/EnemyInfo"]
+layout_mode = 2
+theme_override_constants/margin_left = 10
+theme_override_constants/margin_top = 10
+theme_override_constants/margin_right = 10
+theme_override_constants/margin_bottom = 10
+
+[node name="VBoxContainer" type="VBoxContainer" parent="UI/EnemyInfo/MarginContainer"]
+layout_mode = 2
+theme_override_constants/separation = 5
+
+[node name="EnemyName" type="Label" parent="UI/EnemyInfo/MarginContainer/VBoxContainer"]
+layout_mode = 2
+theme_override_fonts/font = ExtResource("2_font")
+theme_override_font_sizes/font_size = 16
+text = "Enemy"
+
+[node name="EnemyLevel" type="Label" parent="UI/EnemyInfo/MarginContainer/VBoxContainer"]
+layout_mode = 2
+theme_override_font_sizes/font_size = 12
+text = "Lv. 5"
+
+[node name="HPBar" type="ProgressBar" parent="UI/EnemyInfo/MarginContainer/VBoxContainer"]
+custom_minimum_size = Vector2(0, 12)
+layout_mode = 2
+theme_override_styles/fill = SubResource("StyleBoxFlat_hp")
+max_value = 1.0
+value = 1.0
+show_percentage = false
+
+[node name="HPLabel" type="Label" parent="UI/EnemyInfo/MarginContainer/VBoxContainer"]
+layout_mode = 2
+theme_override_font_sizes/font_size = 10
+text = "HP: 50/50"
+
+[node name="PlayerInfo" type="PanelContainer" parent="UI"]
+layout_mode = 1
+anchors_preset = 2
+anchor_top = 1.0
+anchor_bottom = 1.0
+offset_left = 20.0
+offset_top = -100.0
+offset_right = 180.0
+offset_bottom = -20.0
+grow_vertical = 0
+
+[node name="MarginContainer" type="MarginContainer" parent="UI/PlayerInfo"]
+layout_mode = 2
+theme_override_constants/margin_left = 10
+theme_override_constants/margin_top = 10
+theme_override_constants/margin_right = 10
+theme_override_constants/margin_bottom = 10
+
+[node name="VBoxContainer" type="VBoxContainer" parent="UI/PlayerInfo/MarginContainer"]
+layout_mode = 2
+theme_override_constants/separation = 5
+
+[node name="PlayerName" type="Label" parent="UI/PlayerInfo/MarginContainer/VBoxContainer"]
+layout_mode = 2
+theme_override_fonts/font = ExtResource("2_font")
+theme_override_font_sizes/font_size = 16
+text = "Your Creature"
+
+[node name="PlayerLevel" type="Label" parent="UI/PlayerInfo/MarginContainer/VBoxContainer"]
+layout_mode = 2
+theme_override_font_sizes/font_size = 12
+text = "Lv. 5"
+
+[node name="HPBar" type="ProgressBar" parent="UI/PlayerInfo/MarginContainer/VBoxContainer"]
+custom_minimum_size = Vector2(0, 12)
+layout_mode = 2
+theme_override_styles/fill = SubResource("StyleBoxFlat_hp")
+max_value = 1.0
+value = 1.0
+show_percentage = false
+
+[node name="HPLabel" type="Label" parent="UI/PlayerInfo/MarginContainer/VBoxContainer"]
+layout_mode = 2
+theme_override_font_sizes/font_size = 10
+text = "HP: 50/50"
+
+[node name="BattleMenu" type="PanelContainer" parent="UI"]
+layout_mode = 1
+anchors_preset = 3
+anchor_left = 1.0
+anchor_top = 1.0
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_left = -220.0
+offset_top = -120.0
+offset_right = -20.0
+offset_bottom = -20.0
+grow_horizontal = 0
+grow_vertical = 0
+
+[node name="MarginContainer" type="MarginContainer" parent="UI/BattleMenu"]
+layout_mode = 2
+theme_override_constants/margin_left = 15
+theme_override_constants/margin_top = 15
+theme_override_constants/margin_right = 15
+theme_override_constants/margin_bottom = 15
+
+[node name="VBoxContainer" type="VBoxContainer" parent="UI/BattleMenu/MarginContainer"]
+layout_mode = 2
+theme_override_constants/separation = 8
+
+[node name="AttackButton" type="Button" parent="UI/BattleMenu/MarginContainer/VBoxContainer"]
+custom_minimum_size = Vector2(0, 30)
+layout_mode = 2
+theme = ExtResource("3_theme")
+text = "Attack"
+
+[node name="RunButton" type="Button" parent="UI/BattleMenu/MarginContainer/VBoxContainer"]
+custom_minimum_size = Vector2(0, 30)
+layout_mode = 2
+theme = ExtResource("3_theme")
+text = "Run"
+
+[node name="MessageBox" type="PanelContainer" parent="UI"]
+layout_mode = 1
+anchors_preset = 7
+anchor_left = 0.5
+anchor_top = 1.0
+anchor_right = 0.5
+anchor_bottom = 1.0
+offset_left = -280.0
+offset_top = -70.0
+offset_right = -20.0
+offset_bottom = -20.0
+grow_horizontal = 2
+grow_vertical = 0
+
+[node name="MarginContainer" type="MarginContainer" parent="UI/MessageBox"]
+layout_mode = 2
+theme_override_constants/margin_left = 10
+theme_override_constants/margin_top = 10
+theme_override_constants/margin_right = 10
+theme_override_constants/margin_bottom = 10
+
+[node name="MessageLabel" type="Label" parent="UI/MessageBox/MarginContainer"]
+layout_mode = 2
+theme_override_fonts/font = ExtResource("2_font")
+theme_override_font_sizes/font_size = 14
+text = "A wild creature appeared!"
+autowrap_mode = 2

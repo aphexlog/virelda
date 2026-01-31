@@ -57,10 +57,37 @@ func _physics_process(_delta: float) -> void:
 	if dir.length() > 1.0:
 		dir = dir.normalized()
 
+	var was_moving = velocity.length() > 0
 	velocity = dir * speed
-	move_and_slide()
+	var is_moving = move_and_slide()
+	
+	# Check for random encounters when player moves
+	if is_moving and not was_moving:
+		check_encounter()
 
 	update_animation(dir)
+
+func check_encounter():
+	# Random chance for battle
+	if randf() < 0.05:  # 5% chance per step
+		trigger_battle()
+
+func trigger_battle():
+	var wild_creature = CreatureDB.get_random_creature(3, 7)
+	var player_creature = GameData.get_active_creature()
+	
+	if player_creature == null:
+		print("No creature in party!")
+		return
+	
+	# Store battle data and switch to battle scene
+	get_tree().change_scene_to_file("res://scenes/battle_scene.tscn")
+	await get_tree().process_frame
+	
+	# Get battle scene and start battle
+	var battle_scene = get_tree().current_scene
+	if battle_scene.has_method("start_battle"):
+		battle_scene.start_battle(player_creature, wild_creature)
 
 
 func update_animation(dir: Vector2) -> void:
