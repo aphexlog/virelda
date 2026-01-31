@@ -15,7 +15,10 @@ func _input(event):
 	if event is InputEventKey and event.pressed and event.keycode == KEY_I:
 		visible = !visible
 		if visible:
+			AudioManager.play_ui_sound("select")
 			refresh_inventory()
+		else:
+			AudioManager.play_ui_sound("back")
 		get_viewport().set_input_as_handled()
 
 func refresh_inventory():
@@ -33,4 +36,5 @@ func refresh_inventory():
 		item_list.add_item(display_text)
 
 func _on_close_pressed():
+	AudioManager.play_ui_sound("back")
 	visible = false

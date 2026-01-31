@@ -128,6 +128,7 @@ func _on_items_pressed():
 		# Use the potion
 		var heal_amount = min(item_data.effect_value, player_creature.max_hp - player_creature.current_hp)
 		player_creature.current_hp += heal_amount
+		AudioManager.play_battle_sound("heal")
 		update_player_hp()
 		
 		GameData.remove_item(potion, 1)
@@ -159,6 +160,9 @@ func player_attack():
 	player_turn = false
 	show_message("%s attacks!" % player_creature.species.species_name)
 	
+	# Play attack sound
+	AudioManager.play_battle_sound("attack")
+	
 	# Show attack animation
 	var attack_atlas = AtlasTexture.new()
 	attack_atlas.atlas = load(player_creature.species.sprite_attack)
@@ -172,6 +176,7 @@ func player_attack():
 	# Calculate damage
 	var damage = calculate_damage(player_creature, enemy_creature)
 	enemy_creature.take_damage(damage)
+	AudioManager.play_battle_sound("damage")
 	update_enemy_hp()
 	
 	# Show damage and effectiveness
@@ -199,6 +204,9 @@ func player_attack():
 func enemy_attack():
 	show_message("%s attacks!" % enemy_creature.species.species_name)
 	
+	# Play attack sound
+	AudioManager.play_battle_sound("attack")
+	
 	# Show attack animation
 	var attack_atlas = AtlasTexture.new()
 	attack_atlas.atlas = load(enemy_creature.species.sprite_attack)
@@ -212,6 +220,7 @@ func enemy_attack():
 	# Calculate damage
 	var damage = calculate_damage(enemy_creature, player_creature)
 	player_creature.take_damage(damage)
+	AudioManager.play_battle_sound("damage")
 	update_player_hp()
 	
 	# Show damage and effectiveness
@@ -268,6 +277,7 @@ func play_vfx(position: Vector2):
 func battle_won():
 	battle_active = false
 	disable_menu()
+	AudioManager.play_battle_sound("victory")
 	show_message("You won! %s fainted!" % enemy_creature.species.species_name)
 	await get_tree().create_timer(1.5).timeout
 	
@@ -319,6 +329,7 @@ func _on_run_pressed():
 		return
 	
 	disable_menu()
+	AudioManager.play_battle_sound("run")
 	
 	# 50% chance to run
 	if randf() < 0.5:

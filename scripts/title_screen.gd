@@ -10,9 +10,11 @@ func _ready():
 		$Content/VBoxContainer/HBoxContainer/ButtonMenu/LoadGameButton.disabled = true
 
 func _on_new_game_pressed():
+	AudioManager.play_ui_sound("select")
 	get_tree().change_scene_to_file("res://scenes/ui/character_select.tscn")
 
 func _on_load_game_pressed():
+	AudioManager.play_ui_sound("select")
 	if GameData.load_game():
 		# Flag that we need to apply loaded data
 		GameData.should_apply_on_ready = true
@@ -21,4 +23,5 @@ func _on_load_game_pressed():
 		print("Failed to load game")
 
 func _on_credits_pressed():
+	AudioManager.play_ui_sound("select")
 	get_tree().change_scene_to_file("res://scenes/ui/credits.tscn")
