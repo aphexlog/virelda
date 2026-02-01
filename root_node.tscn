@@ -1,4 +1,4 @@
-[gd_scene load_steps=15 format=4 uid="uid://bt852bwrbn4vb"]
+[gd_scene load_steps=17 format=4 uid="uid://bt852bwrbn4vb"]
 
 [ext_resource type="Texture2D" uid="uid://do3feo4r2bles" path="res://assets/tilesets/tileset.png" id="1_v0vck"]
 [ext_resource type="PackedScene" uid="uid://dy2hpk8gq08qw" path="res://scenes/player.tscn" id="2_52tyj"]
@@ -7,6 +7,7 @@
 [ext_resource type="PackedScene" path="res://scenes/ui/cheat_menu.tscn" id="5_cheat"]
 [ext_resource type="PackedScene" path="res://scenes/ui/player_hud.tscn" id="6_hud"]
 [ext_resource type="PackedScene" path="res://scenes/ui/inventory_screen.tscn" id="7_inv"]
+[ext_resource type="PackedScene" uid="uid://cct7gl1p6gm0e" path="res://house_green.tscn" id="8_y2gys"]
 
 [sub_resource type="TileSetAtlasSource" id="TileSetAtlasSource_52tyj"]
 texture = ExtResource("1_v0vck")
@@ -1210,3 +1211,6 @@ shape = SubResource("RectangleShape2D_y2gys")
 [node name="CollisionShape2D6" type="CollisionShape2D" parent="StaticBody2D"]
 position = Vector2(111.101, -121.76)
 shape = SubResource("RectangleShape2D_rgetd")
+
+[node name="House_Green" parent="." instance=ExtResource("8_y2gys")]
+position = Vector2(-39, -81)

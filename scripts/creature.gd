@@ -39,6 +39,7 @@ func gain_experience(exp: int):
 
 func level_up():
 	level += 1
+	AudioManager.play_battle_sound("level_up")
 	print("%s leveled up to %d!" % [species.species_name, level])
 	
 	var old_max_hp = max_hp

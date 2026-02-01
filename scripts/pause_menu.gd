@@ -12,14 +12,17 @@ func _input(event):
 		if visible:
 			_on_resume_pressed()
 		else:
+			AudioManager.play_ui_sound("select")
 			show()
 			get_tree().paused = true
 
 func _on_resume_pressed():
+	AudioManager.play_ui_sound("back")
 	hide()
 	get_tree().paused = false
 
 func _on_save_pressed():
+	AudioManager.play_ui_sound("confirm")
 	if GameData.save_game():
 		# TODO: Show a visual confirmation (like a popup or label)
 		print("Game saved!")
@@ -27,8 +30,10 @@ func _on_save_pressed():
 		print("Failed to save game")
 
 func _on_main_menu_pressed():
+	AudioManager.play_ui_sound("select")
 	get_tree().paused = false
 	get_tree().change_scene_to_file("res://scenes/ui/title_screen.tscn")
 
 func _on_quit_pressed():
+	AudioManager.play_ui_sound("select")
 	get_tree().quit()

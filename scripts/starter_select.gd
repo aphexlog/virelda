@@ -29,6 +29,7 @@ func _ready():
 		button.pressed.connect(callable)
 
 func choose_starter(index: int):
+	AudioManager.play_ui_sound("confirm")
 	print("=== CHOOSE_STARTER CALLED ===")
 	print("Index: ", index)
 	
