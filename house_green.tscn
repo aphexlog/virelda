@@ -1,0 +1,55 @@
+[gd_scene load_steps=4 format=3 uid="uid://cct7gl1p6gm0e"]
+
+[ext_resource type="Texture2D" uid="uid://do3feo4r2bles" path="res://assets/tilesets/tileset.png" id="1_do5u5"]
+[ext_resource type="Script" uid="uid://cyufe7rg5qqum" path="res://interact.gd" id="2_sfoau"]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_do5u5"]
+size = Vector2(16, 24)
+
+[node name="House_Green" type="Node2D"]
+
+[node name="Visual" type="Node2D" parent="."]
+
+[node name="Base" type="Sprite2D" parent="Visual"]
+texture = ExtResource("1_do5u5")
+region_enabled = true
+region_rect = Rect2(564, 305, 104, 31)
+
+[node name="Roof" type="Sprite2D" parent="Visual"]
+position = Vector2(-1, -56)
+texture = ExtResource("1_do5u5")
+region_enabled = true
+region_rect = Rect2(560, 224, 111, 82)
+
+[node name="Details" type="Node2D" parent="Visual"]
+
+[node name="Collision" type="StaticBody2D" parent="."]
+
+[node name="Walls" type="CollisionPolygon2D" parent="Collision"]
+visible = false
+position = Vector2(-20.3125, -6.43701)
+scale = Vector2(5.07812, 0.989708)
+polygon = PackedVector2Array(14.24, 21.6599, 5.37846, 21.6599, 1.83385, 21.6599, -6.24, 21.6599, -6.24, -10.6728, 14.24, -10.6728)
+one_way_collision_margin = 0.0
+
+[node name="PorchSteps" type="CollisionShape2D" parent="Collision"]
+
+[node name="Interact" type="Area2D" parent="."]
+collision_layer = 4
+script = ExtResource("2_sfoau")
+
+[node name="Collision" type="CollisionShape2D" parent="Interact"]
+position = Vector2(0, 5)
+shape = SubResource("RectangleShape2D_do5u5")
+
+[node name="Prompt" type="Label" parent="Interact"]
+visible = false
+z_index = 10
+offset_left = -56.0
+offset_top = -57.0
+offset_right = 55.0
+offset_bottom = 16.0
+text = "Press E"
+
+[node name="Sorting" type="Marker2D" parent="."]
+position = Vector2(-1, 15)
